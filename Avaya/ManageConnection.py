@@ -15,4 +15,4 @@ class SshManager:
     def CloseSsh(self):
         print("Closing SSH")
         SSH.Close()
-        print("SSH Closed")
+        print("SSH Closedd")
