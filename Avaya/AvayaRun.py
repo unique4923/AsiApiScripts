@@ -13,7 +13,9 @@ class AvayaScript():
         print("-> AvayaRunScript")
         global SSH
         SSH = SshManager(self.SshConnection, self.Req)
-        SSH.LoginSsh()
+        if not SSH.LoginSsh():
+            raise Exception("Failed to connect.  See previous logging for details.")
+        
         avayaAction = self.Req.Action.upper()
         if avayaAction == "SETSYNC":
             scr = DoSetDump
@@ -22,7 +24,7 @@ class AvayaScript():
         else:
             raise Exception('No script for Avaya action: "{0}"'.format(self.Req.Action))
        
-        scr()
+        scr(SSH)
 
         SSH.CloseSsh()
         
