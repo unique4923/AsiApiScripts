@@ -1,7 +1,7 @@
 import base64
 import os
 import sys
-from Logger import Logger
+from Logger import Logger, Log
 from datetime import datetime
 from Avaya.AvayaRun import AvayaScript
 
@@ -30,19 +30,18 @@ eventLogPath = log.GetBaseEventLogLocation()
 ScriptSuccess = False
 ScriptErrorOrMessageText = ""
 with open(eventLogPath, 'a') as f:
-    sys.stdout = f # Change the standard output to the file we created.
+    sys.stdout = f # Change the standard output to the file we created. THIS CHANGES THE PRINT TO THE EVENT LOG
 
-    print
-    print('################################################ {0} ################################################'.format(datetime.now().strftime("%Y-%m-%d @ %H:%M:%S")))
-    print("***EventLog location: " + eventLogPath)
+    Log('################################################ {0} ################################################'.format(datetime.now().strftime("%Y-%m-%d @ %H:%M:%S")), False)
+    Log("***EventLog location: " + eventLogPath, False)
     # print("***CommLog location: " + commLogPath)
-    print("***SwitchType: " + str(MyRequest.SwitchType))
-    print("***Action: " + MyRequest.Action)
+    Log("***SwitchType: " + str(MyRequest.SwitchType), False)
+    Log("***Action: " + MyRequest.Action, False)
     # sys.stdout = original_stdout # Reset the standard output to its original value
 
     try:
         ScriptSuccess = DoSwitchRequest(MyRequest)
-        print("ScriptSuccess: " + str(ScriptSuccess))
+        Log("ScriptSuccess: " + str(ScriptSuccess))
     except Exception as e:
         ScriptSuccess = False
         print("ScriptSuccess: false - args: {0}").format(e.args)

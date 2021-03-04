@@ -2,6 +2,8 @@ from Tools.Comm import Clear, PrintStuff
 from SetSync import DoSetDump
 from PortSync import DoPortDump
 from ManageConnection import SshManager
+from datetime import datetime
+from Logger import Log
 # from ManageConnection import LoginSsh, CloseSsh
 
 class AvayaScript():
@@ -10,7 +12,8 @@ class AvayaScript():
         self.Req = req
 
     def Run(self):
-        print("-> AvayaRunScript")
+        # print("-> AvayaRunScript")
+        Log("-> AvayaRunScript")
         global SSH
         SSH = SshManager(self.SshConnection, self.Req)
         if not SSH.LoginSsh():
@@ -25,7 +28,7 @@ class AvayaScript():
             raise Exception('No script for Avaya action: "{0}"'.format(self.Req.Action))
        
         scr(SSH)
-        print "Script Complete!"
+        Log("Script Complete!")
         SSH.CloseSsh()
         
         return True

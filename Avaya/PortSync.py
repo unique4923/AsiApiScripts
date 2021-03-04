@@ -1,3 +1,5 @@
+from Logger import Log
+
 def DoPortDump():
-    print("-> DoPortDump")
+    Log("-> DoPortDump")
     return False

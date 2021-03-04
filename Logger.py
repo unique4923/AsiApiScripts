@@ -1,5 +1,5 @@
 import os
-from datetime import date
+from datetime import date, datetime
 
 class Logger:
 	def __init__(self, req):
@@ -20,4 +20,11 @@ class Logger:
 
 	# def GetBaseCommLogLocation(self):
 	# 	return "{0}\\{1}_{2}_C.txt".format(self.commLogPath, self.req.SwitchName, date.today().strftime("%b_%d_%Y"))
-	
+
+def Log(message, includeTimeStamp = True):
+	if includeTimeStamp:
+		totalMessage = "{0}: {1}".format(datetime.now().strftime("%H:%M:%S"), message)
+	else:
+		totalMessage = message
+	print(totalMessage)
+		
