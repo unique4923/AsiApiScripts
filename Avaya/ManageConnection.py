@@ -8,15 +8,22 @@ class SshManager:
         self.req = req 
         Log("ssh created")
 
-    def GetData(self, expect, waitTime = 2):
+    def RecievedCorrectData(self, expect, waitTime = 2):
         if expect in SSH.WaitForData(expect, waitTime):
             return True
         else:
             return False
     
+    def GetData(self, expect, waitTime = 2):
+        return SSH.WaitForData(expect, waitTime)
+
     def SendCommand(self, command, echo = True, sendEndOfLine = True):
         #public string SendCommand(string command, bool echo = true, bool sendEndOfLine = true) {} C# signature
         SSH.SendCommand(command, echo, sendEndOfLine)
+
+    loggedIn = False
+    def PrintStatus(self):
+        Log("loggedIn={0}".format(self.loggedIn))
 
     def LoginSsh(self):
         Log("Opening SSH")
@@ -24,16 +31,16 @@ class SshManager:
         # resp = SSH.BufferResponse(connectedChar, 5)
         retBool = False
         connectedChar = "$"
-        if self.GetData(connectedChar):
+        if self.RecievedCorrectData(connectedChar):
             Log("First level")
             SSH.SendCommand("ssh {0}@{1} -p 5022".format(self.req.User2, self.req.IpAddress2))
-            if self.GetData("Password:"):
+            if self.RecievedCorrectData("Password:"):
                 Log("sending pass")
                 SSH.SendCommand(self.req.Password2)
-                if self.GetData("Terminal Type"):
+                if self.RecievedCorrectData("Terminal Type"):
                     Log("sending vt220")
                     SSH.SendCommand("VT220")
-                    if self.GetData("Command:"):
+                    if self.RecievedCorrectData("Command:"):
                         Log("Connected!")
                         retBool = True
                     else:
@@ -44,7 +51,7 @@ class SshManager:
                 Log("Fail to get password")
         else:
             Log("Failed first level")
-
+        self.loggedIn = True
         return retBool
        
     def CloseSsh(self):

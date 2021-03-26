@@ -16,9 +16,13 @@ class AvayaScript():
         Log("-> AvayaRunScript")
         global SSH
         SSH = SshManager(self.SshConnection, self.Req)
+        SSH.PrintStatus()
+
         if not SSH.LoginSsh():
             raise Exception("Failed to connect.  See previous logging for")
         
+        SSH.PrintStatus()
+
         avayaAction = self.Req.Action.upper()
         if avayaAction == "SETSYNC":
             scr = DoSetDump
@@ -27,11 +31,14 @@ class AvayaScript():
         else:
             raise Exception('No script for Avaya action: "{0}"'.format(self.Req.Action))
        
-        scr(SSH)
-        Log("Script Complete!")
-        SSH.CloseSsh()
+        self.RunAndClose(scr)
         
         return True
+    
+    def RunAndClose(self, script):
+        script(SSH)
+        Log("Script Complete!")
+        SSH.CloseSsh()
         # PrintStuff()
         # Clear()
         # PrintStuff()

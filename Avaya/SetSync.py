@@ -1,9 +1,14 @@
-from ManageConnection import SshManager
 from Logger import Log
-
-def DoSetDump(sshObj):
+#sshObj = SshManager
+def DoSetDump(ssh):
     Log("-> DoSetDump")
-    SshManager.SendCommand(sshObj, "list config stat")
-    if SshManager.GetData(sshObj, "Command successfully completed"):
+    ssh.PrintStatus()
+    ssh.SendCommand("list config stat")
+    endMarker = "Command successfully completed"
+ 
+    if endMarker in ssh.GetData(endMarker):
         Log("List stat command completed")
+    else:
+        Log("not yet")
+        #try again in loop
     return True
