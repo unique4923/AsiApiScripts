@@ -1,4 +1,46 @@
 from Logger import Log
+import SSH
+import MyRequest
+
+def RecievedCorrectData(expect, waitTime = 2):
+        if expect in SSH.WaitForData(expect, waitTime):
+            return True
+        else:
+            return False
+
+def LoginSsh():
+        Log("Opening SSH")
+        SSH.Open(MyRequest.IpAddress1, MyRequest.IpPort1, MyRequest.User1, MyRequest.Password1)
+        # resp = SSH.BufferResponse(connectedChar, 5)
+        retBool = False
+        connectedChar = "$"
+        if RecievedCorrectData(connectedChar):
+            Log("First level")
+            SSH.SendCommand("ssh {0}@{1} -p 5022".format(MyRequest.User2, MyRequest.IpAddress2))
+            if RecievedCorrectData("Password:"):
+                Log("sending pass")
+                SSH.SendCommand(MyRequest.Password2)
+                if RecievedCorrectData("Terminal Type"):
+                    Log("sending vt220")
+                    SSH.SendCommand("VT220")
+                    if RecievedCorrectData("Command:"):
+                        Log("Connected!")
+                        retBool = True
+                    else:
+                        Log("Never received the Command: prompt from switch")
+                else:
+                    Log("Failed to get Terminal Type")
+            else:
+                Log("Fail to get password")
+        else:
+            Log("Failed first level")
+
+        return retBool
+
+def CloseSsh():
+        Log("Closing SSH")
+        SSH.Close()
+        Log("SSH Closed")
 
 class SshManager:
     def __init__(self, ssh, req):

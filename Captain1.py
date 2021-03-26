@@ -3,15 +3,13 @@ import os
 import sys
 from Logger import Logger, Log
 from datetime import datetime
-import AvayaRun
-import MyRequest
+from Avaya.AvayaRun import AvayaScript
 
 def DoSwitchRequest(req):
     if req.SwitchType == 5:
-        Log("Avaya")
-        script = AvayaRun
-        # script = AvayaScript(SSH, req)
-        # return script.Run()
+        script = AvayaScript(SSH, req)
+        return script.Run()
+        # print("The value of __name__ is:", repr(__name__))
     elif st == "Cisco":
         print "doing cisco"
         #NOT CURRENTLY IMPLEMENTED!!!!
@@ -19,9 +17,6 @@ def DoSwitchRequest(req):
     else:
         print("Switch type not supported")
         return False
-    
-    action = MyRequest.Action.upper()
-    return script.Run(action)
 
 print('C# console message -> Not python')
 
