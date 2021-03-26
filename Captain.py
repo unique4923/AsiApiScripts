@@ -3,15 +3,12 @@ import os
 import sys
 from Logger import Logger, Log
 from datetime import datetime
-import AvayaRun
 import MyRequest
 
-def DoSwitchRequest(req):
-    if req.SwitchType == 5:
-        Log("Avaya")
-        script = AvayaRun
-        # script = AvayaScript(SSH, req)
-        # return script.Run()
+def DoSwitchRequest():
+    if MyRequest.SwitchType == 5:
+        import Avaya.CaptainAvaya
+        scriptRun = Avaya.CaptainAvaya.Run
     elif st == "Cisco":
         print "doing cisco"
         #NOT CURRENTLY IMPLEMENTED!!!!
@@ -21,7 +18,8 @@ def DoSwitchRequest(req):
         return False
     
     action = MyRequest.Action.upper()
-    return script.Run(action)
+    
+    return scriptRun(action)
 
 print('C# console message -> Not python')
 
@@ -29,7 +27,6 @@ print('C# console message -> Not python')
 log = Logger(MyRequest)
 
 eventLogPath = log.GetBaseEventLogLocation()
-# commLogPath = log.GetBaseCommLogLocation()
 
 #debugConsole = sys.stdout # Save a reference to the original standard output
 ScriptSuccess = False
@@ -45,7 +42,7 @@ with open(eventLogPath, 'a') as f:
     # sys.stdout = original_stdout # Reset the standard output to its original value
 
     try:
-        ScriptSuccess = DoSwitchRequest(MyRequest)
+        ScriptSuccess = DoSwitchRequest()
         Log("ScriptSuccess: " + str(ScriptSuccess))
     except Exception as e:
         ScriptSuccess = False
