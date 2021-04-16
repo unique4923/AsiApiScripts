@@ -16,3 +16,7 @@ def DoSetDump():
     
     CloseSsh()
     return True
+
+def DoPortDump():
+    Log("-> DoPortDump")
+    return False
