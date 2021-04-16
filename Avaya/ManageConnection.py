@@ -3,10 +3,11 @@ import SSH
 import MyRequest
 
 def RecievedCorrectDataSsh(expect, waitTime = 2):
-        if expect in SSH.WaitForData(expect, waitTime):
-            return True
-        else:
+        data = SSH.WaitForData(expect, waitTime)
+        if data == None:
             return False
+        else:
+            return expect in data
 
 def LoginSsh():
         Log("Opening SSH")
@@ -19,7 +20,8 @@ def LoginSsh():
             Log("First level")
             SSH.SendCommand("ssh {0}@{1} -p 5022".format(MyRequest.User2, MyRequest.IpAddress2))
             if RecievedCorrectDataSsh("Password:"):
-                Log("sending pass")
+                Log("sending pass2")
+                # SSH.SendCommand("dddd")
                 SSH.SendCommand(MyRequest.Password2)
                 if RecievedCorrectDataSsh("Terminal Type"):
                     Log("sending vt220")
@@ -35,7 +37,14 @@ def LoginSsh():
                 Log("Fail to get password")
         else:
             Log("Failed first level")
-
+        
+        if not retBool:
+            switchErr = SSH.ErrorMessageFull
+            if not switchErr == "":
+                raise Exception("Error Connecting SSH: {0}".format(switchErr))
+            else:
+                raise Exception("Error Connecting SSH.")
+        
         return retBool
 
 def CloseSsh():

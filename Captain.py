@@ -4,6 +4,7 @@ import sys
 from Logger import Logger, Log
 from datetime import datetime
 import MyRequest
+import traceback
 
 def DoSwitchRequest():
     if MyRequest.SwitchType == 5:
@@ -46,6 +47,7 @@ with open(eventLogPath, 'a') as f:
         Log("ScriptSuccess: " + str(ScriptSuccess))
     except Exception as e:
         ScriptSuccess = False
-        print("ScriptSuccess: false - args: {0}").format(e.args)
-        ScriptErrorOrMessageText = 'Error from script: "{0}".\nFor details see log:\n{1}'.format(e, eventLogPath)
+        print("ScriptSuccess: false - Error: {0}").format(e.args)
+        traceback.print_exception(*sys.exc_info()) #this is printing the call stack to c#????
+        ScriptErrorOrMessageText = 'Script returned an error: "{0}" For details see log at:{1}'.format(e, eventLogPath)
         raise Exception(ScriptErrorOrMessageText)
