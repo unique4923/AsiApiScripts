@@ -12,6 +12,7 @@ def DoSetDump():
         LoginSsh()
 
     listStatNumbers = ListStation.GetNumbersInSwitch()
-
+    # Log(listStatNumbers)
+    
     CloseSsh()
     return True

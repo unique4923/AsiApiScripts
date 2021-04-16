@@ -11,7 +11,7 @@ def DoSwitchRequest():
         import Avaya.CaptainAvaya
         scriptRun = Avaya.CaptainAvaya.Run
     elif st == "Cisco":
-        print "doing cisco"
+        Log("doing cisco")
         #NOT CURRENTLY IMPLEMENTED!!!!
         return False
     else:
