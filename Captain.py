@@ -5,6 +5,7 @@ from Logger import Logger, Log
 from datetime import datetime
 import MyRequest
 import traceback
+import Globals
 
 def DoSwitchRequest():
     if MyRequest.SwitchType == 5:
@@ -40,6 +41,12 @@ with open(eventLogPath, 'a') as f:
     # print("***CommLog location: " + commLogPath)
     Log("***SwitchType: " + str(MyRequest.SwitchType), False)
     Log("***Action: " + MyRequest.Action, False)
+    
+    if MyRequest.CairsGlobals is not None:    
+        global MyCairsGlobals 
+        MyCairsGlobals = Globals.CairsGlobals()
+        # Log("***Switch dump Location: {0}".format(MyCairsGlobals.GetVariable(Globals.GENERAL, Globals.SWITCHDUMPLOCATION)), False)
+    
     # sys.stdout = original_stdout # Reset the standard output to its original value
 
     try:
