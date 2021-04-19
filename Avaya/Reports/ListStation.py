@@ -17,15 +17,14 @@ def ManagePage(page, p):
         #could be pages end???
         response = SSH.GetCurrentMessage()
         if "Command:" in response:
-            Log("Finished ListStat!")
             ParsePage(response, p, False)
+            Log("Finished ListStat!")
             return True
         else:
             Log("ERROR: Not end / Not page: {0}".format(response))
             raise Exception("Not getting response")
     else:
         ParsePage(page, p)
-        Log("Next Page")
         SSH.SendCommand(NEXTPAGE)
         return False
 

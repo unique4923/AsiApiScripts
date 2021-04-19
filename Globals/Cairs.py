@@ -11,7 +11,7 @@ class CairsGlobals:
 
         Log("***Globals from Cairs: {0} (Switch Dump Location - {1})".format(cairsGlobalCount, self.GetVariable(GENERAL, SWITCHDUMPLOCATION)), False)
     
-    def ReplaceCategories(self, category):
+    def ReplaceCategoriesNames(self, category):
         if category.__contains__("Avaya"): return AVAYA
         elif category.__contains__("TB850"): return TELEBOSS
         elif category.__contains__("General"): return GENERAL
@@ -23,7 +23,7 @@ class CairsGlobals:
 
     def LoadGlobalsDictionary(self):
         for gv in MyRequest.CairsGlobals:
-            category = self.ReplaceCategories(gv.Setting_Category)
+            category = self.ReplaceCategoriesNames(gv.Setting_Category)
             settingName = gv.Setting_Name
             settingValue = gv.Initial_Value
 

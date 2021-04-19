@@ -4,10 +4,12 @@ from Logger import Log
 import MyRequest
 import Avaya.Reports.Runner
 
+
 def Run(action):
     Log("Running Avaya Script!")
     
     if action == "SETSYNC":
+        # Log("GV report location: {0}",MyCairsGlobals.GetVariable(MyCairsGlobals.GENERAL, MyCairsGlobals.SWITCHDUMPLOCATION))
         return Avaya.Reports.Runner.DoSetDump()
         # return SetSync.DoSetDump()
     elif action == "PORTSYNC":

@@ -2,7 +2,7 @@ from Logger import Log
 import SSH
 from Avaya.ManageConnection import LoginSsh, CloseSsh
 import ListStation
-#sshObj = SshManager
+import DisplayStation
 
 def DoSetDump():
     Log("-> DoSetDump")
@@ -12,6 +12,7 @@ def DoSetDump():
         LoginSsh()
 
     listStatNumbers = ListStation.GetNumbersInSwitch()
+    DisplayStation.DoDisplayStation(listStatNumbers)
     # Log(listStatNumbers)
     
     CloseSsh()
