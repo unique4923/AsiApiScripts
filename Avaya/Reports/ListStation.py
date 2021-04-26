@@ -1,7 +1,7 @@
 from Logger import Log
 import  SSH
 import re
-from Avaya.KeyCommands import NEXTPAGE
+from Avaya.KeyCommands import NEXTPAGE, CANCEL
 
 _DnLinePattern = "\e?\[\d{1,};1H(?<DN>[\d-]+)"
 
@@ -25,19 +25,25 @@ def ManagePage(page, p):
             raise Exception("Not getting response")
     else:
         ParsePage(page, p)
+        #####DEBUGGING 
+        # return True
+        #####END
         SSH.SendCommand(NEXTPAGE)
         return False
 
 def GetNumbersInSwitch():
     Log("->ListStation.GetNumbersInSwitch()")
-    SSH.SendCommand("list stat")
+    SSH.SendCommand("list stat") 
     endMarker = "Command successfully completed"
     p = ListStatPageData()
     gotEnd = False
+
     while not gotEnd:
         response = SSH.WaitForData("press NEXT PAGE to continue")
         gotEnd = ManagePage(response, p)
-
+    
+    SSH.FillBuffer()
+    SSH.SendCommand(CANCEL)
     p.PrintStatistics()
     return p.DnList
         

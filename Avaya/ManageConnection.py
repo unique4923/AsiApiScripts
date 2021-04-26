@@ -22,7 +22,7 @@ def LoginSsh():
             if RecievedCorrectDataSsh("Password:"):
                 Log("sending pass2")
                 # SSH.SendCommand("dddd")
-                SSH.SendCommand(MyRequest.Password2)
+                SSH.SendPassword(MyRequest.Password2)
                 if RecievedCorrectDataSsh("Terminal Type"):
                     Log("sending vt220")
                     SSH.SendCommand("VT220")

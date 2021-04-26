@@ -13,7 +13,7 @@ def Run(action):
         return Avaya.Reports.Runner.DoSetDump()
         # return SetSync.DoSetDump()
     elif action == "PORTSYNC":
-        return PortSync.DoPortDump()
+        return Avaya.Reports.Runner.DoPortDump()
     else:
         raise Exception('No script for Avaya action: "{0}"'.format(MyRequest.Action))
     
