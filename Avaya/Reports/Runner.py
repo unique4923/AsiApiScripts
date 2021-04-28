@@ -12,6 +12,7 @@ def DoSetDump():
         LoginSsh()
 
     listStatNumbers = ListStation.GetNumbersInSwitch()
+    SSH.WaitForData("Command:")
     DisplayStation.DoDisplayStation(listStatNumbers)
     # Log(listStatNumbers)
     
