@@ -1,15 +1,15 @@
 from Logger import Log
 import MyRequest
 
-class CairsGlobals:
+class ExternalGlobals:
     def __init__(self):
-        if MyRequest.CairsGlobals is not None:
-            cairsGlobalCount = len(MyRequest.CairsGlobals)
+        if MyRequest.ExternalGlobals is not None:
+            externalGlobalCount = len(MyRequest.ExternalGlobals)
             self.LoadGlobalsDictionary()
         else:
-            cairsGlobalCount = 0
+            externalGlobalCount = 0
 
-        Log("***Globals from Cairs: {0} (Switch Dump Location - {1})".format(cairsGlobalCount, self.GetVariable(GENERAL, SWITCHDUMPLOCATION)), False)
+        Log("***External Global Variables: {0} (Switch Dump Location - {1})".format(externalGlobalCount, self.GetVariable(GENERAL, SWITCHDUMPLOCATION)), False)
     
     def ReplaceCategoriesNames(self, category):
         if category.__contains__("Avaya"): return AVAYA
@@ -22,7 +22,7 @@ class CairsGlobals:
         else: return category 
 
     def LoadGlobalsDictionary(self):
-        for gv in MyRequest.CairsGlobals:
+        for gv in MyRequest.ExternalGlobals:
             category = self.ReplaceCategoriesNames(gv.Setting_Category)
             settingName = gv.Setting_Name
             settingValue = gv.Initial_Value
