@@ -23,20 +23,16 @@ class ExternalGlobals:
 
     def LoadGlobalsDictionary(self):
         for gv in MyRequest.ExternalGlobals:
-            category = self.ReplaceCategoriesNames(gv.Setting_Category)
             settingName = gv.Setting_Name
             settingValue = gv.Initial_Value
-
-            if self._LookupDictionary.__contains__(category):
-                subDict = self._LookupDictionary[category]
-            else:
-                subDict = {}
+            subDict = {}
+            if gv.Setting_Category != None:
+                category = self.ReplaceCategoriesNames(gv.Setting_Category)
+                if self._LookupDictionary.__contains__(category):
+                    subDict = self._LookupDictionary[category]
             
             subDict[settingName] = settingValue
             self._LookupDictionary[category] = subDict
-
-        # Log(self._LookupDictionary.keys())    
-        # Log(self._LookupDictionary)
 
     _LookupDictionary = {}
     
