@@ -1,5 +1,5 @@
 from Logger import Log
-from Globals import Globals, ExternalGlobals
+from Globals import ExternalGlobals
 import SSH
 import re
 from Avaya.KeyCommands import NEXTPAGE, CANCEL
@@ -7,7 +7,7 @@ from Avaya.KeyCommands import NEXTPAGE, CANCEL
 
 def DoDisplayStation(listStatNumbers):
     Log("->DisplayStation.DoDisplayStation")
-    dumpLocation = Globals.MyExternalGlobals.GetVariable(ExternalGlobals.GENERAL, ExternalGlobals.SWITCHDUMPLOCATION)
+    dumpLocation = ExternalGlobals.MyExternalGlobals.GetVariable(ExternalGlobals.GENERAL, ExternalGlobals.SWITCHDUMPLOCATION)
     if dumpLocation == None or dumpLocation.strip() == "":
         raise Exception("There is no location to dump the report to.  Please specify the report dump location in the Cairs Switch > Global Variables > General.SwitchDumpLocation")
     try:

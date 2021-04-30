@@ -5,7 +5,8 @@ from Logger import Logger, Log
 from datetime import datetime
 import MyRequest
 import traceback
-from Globals import Globals #"globals" folder, "globals" file
+# from Globals import Globals #"globals" folder, "globals" file
+from Globals import ExternalGlobals
 
 def DoSwitchRequest():
     if MyRequest.SwitchType == 5:
@@ -42,7 +43,8 @@ with open(eventLogPath, 'a') as f:
     Log("***SwitchType: " + str(MyRequest.SwitchType), False)
     Log("***Action: " + MyRequest.Action, False)
     
-    Globals.Inititalize()
+    # Globals.Inititalize()
+    ExternalGlobals.Inititalize()
     
         # Log("***Switch dump Location: {0}".format(MyCairsGlobals.GetVariable(Globals.GENERAL, Globals.SWITCHDUMPLOCATION)), False)
     

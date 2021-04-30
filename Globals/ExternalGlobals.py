@@ -1,6 +1,13 @@
 from Logger import Log
 import MyRequest
 
+def Inititalize():
+    global MyExternalGlobals
+    if MyRequest.ExternalGlobals is not None: 
+        MyExternalGlobals = ExternalGlobals()
+    # else:
+        # Log("No external variables found")
+
 class ExternalGlobals:
     def __init__(self):
         if MyRequest.ExternalGlobals is not None:
