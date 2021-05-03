@@ -37,33 +37,12 @@ def GetStationInfo(number):
     currentPage = 1
     # Log("PageData:{0}".format(pageData))
     pageEndMarker = "[0m" #found multiple times on a page but not in body of page
-    response = SSH.WaitForData(pageEndMarker, 1)
-    # Log("TICKER:{0}".format(response)) 
-    while currentPage <= pageMax:
+    while currentPage < pageMax:
+        response = SSH.WaitForData(pageEndMarker, 1)
+        Log("page:{0} of {1}".format(currentPage, pageMax)) 
         SSH.SendCommand(NEXTPAGE)
         pageData = SSH.WaitForPattern(_StationPagePattern, 1)
         currentPage += 1
-    # if(response != None):
-    #     Log("PAGE:{0}".format(response)) 
-    # else:
-    #     Log("PAGE NONE!")   
-    # response = SSH.WaitForData("[2;38HSTATION")
-    # Log("NEW SET FIRST PAGE:{0}".format(response))
-    # SSH.WaitForData("Page")
-    # if response != None:
-    #     currentPage = 1
-    #     pageMax = GetPageMax(response)
-
-    #     while currentPage <= pageMax:
-    #         #[2;38HSTATION
-    #         nextPage = SSH.WaitForData("Page")
-    #         Log("NEXTPAGE:{0}".format(nextPage))
-    #         SSH.ProgramBreak("{0} page {1} of {2}".format(number, currentPage, pageMax))
-    #         SSH.SendCommand(NEXTPAGE)
-    #         currentPage += 1
-    #         # if response != None:
-    #             # SSH.SendCommand(CANCEL)
-    
     SSH.SendCommand(CANCEL)
     SSH.WaitForData("Command:")
 
