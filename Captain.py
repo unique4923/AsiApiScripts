@@ -7,7 +7,7 @@ import MyRequest
 import traceback
 # from Globals import Globals #"globals" folder, "globals" file
 from Globals import ExternalGlobals
-
+#test test
 def DoSwitchRequest():
     if MyRequest.SwitchType == 5:
         import Avaya.CaptainAvaya
