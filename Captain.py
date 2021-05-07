@@ -7,6 +7,7 @@ import MyRequest
 import traceback
 # from Globals import Globals #"globals" folder, "globals" file
 from Globals import ExternalGlobals
+import Version
 #test testy
 def DoSwitchRequest():
     if MyRequest.SwitchType == 5:
@@ -42,7 +43,7 @@ with open(eventLogPath, 'a') as f:
     # print("***CommLog location: " + commLogPath)
     Log("***SwitchType: " + str(MyRequest.SwitchType), False)
     Log("***Action: " + MyRequest.Action, False)
-    
+    Log("***Base Script Version: " + str(Version.GetBaseScriptVersion()), False)
     # Globals.Inititalize()
     ExternalGlobals.Inititalize()
     

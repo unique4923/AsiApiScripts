@@ -14,10 +14,11 @@ def DoDisplayStation(listStatNumbers):
         fullPath = "{0}\\{1}".format(dumpLocation,"AvayaDispStats.txt")
         if SSH.RerouteOutputToFile(fullPath):
             Log("File output rerouted to location:{0}".format(fullPath))
+            Log("...")
             for num in listStatNumbers:
-                Log("BEGINNUMBER:{0}".format(num))
+                # Log("BEGINNUMBER:{0}".format(num))
                 GetStationInfo(num)
-                Log("ENDNUMBER:{0}".format(num))
+                # Log("ENDNUMBER:{0}".format(num))
         else:
             #won't hit here... will error on the c# side.
             raise Exception("Couldn't reroute file")
@@ -35,14 +36,15 @@ def GetStationInfo(number):
     pageData = SSH.WaitForPattern(_StationPagePattern, 1)
     pageMax = GetPageMax(pageData)
     currentPage = 1
-    # Log("PageData:{0}".format(pageData))
+    
+    # Log("page:{0} of {1}".format(currentPage, pageMax))
     pageEndMarker = "[0m" #found multiple times on a page but not in body of page
     while currentPage < pageMax:
         response = SSH.WaitForData(pageEndMarker, 1)
-        Log("page:{0} of {1}".format(currentPage, pageMax)) 
         SSH.SendCommand(NEXTPAGE)
         pageData = SSH.WaitForPattern(_StationPagePattern, 1)
         currentPage += 1
+        # Log("page:{0} of {1}".format(currentPage, pageMax)) 
     SSH.SendCommand(CANCEL)
     SSH.WaitForData("Command:")
 
