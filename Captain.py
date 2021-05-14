@@ -43,7 +43,8 @@ with open(eventLogPath, 'a') as f:
     # print("***CommLog location: " + commLogPath)
     Log("***SwitchType: " + str(MyRequest.SwitchType), False)
     Log("***Action: " + MyRequest.Action, False)
-    Log("***Base Script Version: " + str(Version.GetBaseScriptVersion()), False)
+    scriptInfo = Version.GetScriptInfo()
+    Log("***Base Script Version: " + str(scriptInfo[0]), False)
     # Globals.Inititalize()
     ExternalGlobals.Inititalize()
     
