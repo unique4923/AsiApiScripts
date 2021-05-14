@@ -5,7 +5,7 @@ def GetScriptInfo():
     #Return lastUpdateDate (string) -> Last day these scripts were updated
     version = 1.3
     branch = "Master"
-    lastUpdateDate = "5/7/2021"
+    lastUpdateDate = "5/15/2021"
     history = GetHistory()
     return version, branch, lastUpdateDate, history 
 
