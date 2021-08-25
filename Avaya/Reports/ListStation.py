@@ -2,11 +2,12 @@ from Logger import Log
 import  SSH
 import re
 from Avaya.KeyCommands import NEXTPAGE, CANCEL
+from Avaya.RegexPattern import DNLINEPATTERN
 
-_DnLinePattern = "\e?\[\d{1,};1H(?<DN>[\d-]+)"
+# _DnLinePattern = "\e?\[\d{1,};1H(?<DN>[\d-]+)"
 
 def ParsePage(page, p, incrementPageNumber = True):
-    pageDnList = re.findall(_DnLinePattern, page)
+    pageDnList = re.findall(DNLINEPATTERN, page)
     Log("Numbers On Page{0}:{1}".format(p.iPage, pageDnList))
     p.DnList += pageDnList
     if incrementPageNumber:

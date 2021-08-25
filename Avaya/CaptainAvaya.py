@@ -3,7 +3,7 @@ from Logger import Log
 # from Avaya.Reports import PortSync, SetSync
 import MyRequest
 import Avaya.Reports.Runner
-
+import Avaya.Provision.ChangeSet
 
 def Run(action):
     Log("Running Avaya Script!")
@@ -14,6 +14,8 @@ def Run(action):
         # return SetSync.DoSetDump()
     elif action == "PORTSYNC":
         return Avaya.Reports.Runner.DoPortDump()
+    elif action == "CHANGESET":
+        return Avaya.Provision.ChangeSet.DoChangeSet()
     else:
         raise Exception('No script for Avaya action: "{0}"'.format(MyRequest.Action))
     

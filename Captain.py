@@ -45,10 +45,11 @@ with open(eventLogPath, 'a') as f:
     Log("***Action: " + MyRequest.Action, False)
     scriptInfo = Version.GetScriptInfo()
     Log("***Base Script Version: " + str(scriptInfo[0]), False)
+    
     # Globals.Inititalize()
     ExternalGlobals.Inititalize()
     
-        # Log("***Switch dump Location: {0}".format(MyCairsGlobals.GetVariable(Globals.GENERAL, Globals.SWITCHDUMPLOCATION)), False)
+    #Log("***Switch dump Location: {0}".format(MyCairsGlobals.GetVariable(Globals.GENERAL, Globals.SWITCHDUMPLOCATION)), False)
     
     # sys.stdout = original_stdout # Reset the standard output to its original value
 
