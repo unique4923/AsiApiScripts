@@ -1,2 +1,5 @@
 STATIONPAGEPATTERN = "\e\[0;7mPage\s+(?<CurrentPage>\d+)\s?of\s+(?<MaxPage>\d+)\e\[0m"
 DNLINEPATTERN = "\e?\[\d{1,};1H(?<DN>[\d-]+)"
+FIELDVALUEPATTERN = "\[(\d+);\d+H(?<FIELD>[\d,\s,\w,/,-,\.,\s-\s]+)(:|\?)\s\e\[(?<POSITION>(\d+);\d+)H\e\[0;4m"
+FIELDVALUEPATTERNWITHCURRENTVALUE = "\[(\d+);\d+H(?<FIELD>[\d,\s,\w,/,-,\.,\s-\s]+)(:|\?)\s\e\[(\d+);\d+H\e\[0;4m(?<CURRENTVALUE>.+?)\[0m"
+PAGEENDINGPATTERN = "\e\[0;7m"

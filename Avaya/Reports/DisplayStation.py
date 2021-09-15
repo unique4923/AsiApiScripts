@@ -3,6 +3,7 @@ from Globals import ExternalGlobals
 import SSH
 import re
 from Avaya.Function import Page
+from Avaya.AvayaConstant import PAGE_END_NO_EDIT
 from Avaya.KeyCommands import NEXTPAGE, CANCEL
 from Avaya.RegexPattern import STATIONPAGEPATTERN
 # from enum import Enum  #ironpython 2.7 doesn't support python3 yet... retry when alpha version 3.4 is stablized
@@ -38,26 +39,13 @@ def GetStationInfo(number):
     pageData = SSH.WaitForPattern(STATIONPAGEPATTERN, 1)
     pageMax = Page.GetPageMax(pageData)
     currentPage = 1
-    
-    # Log("page:{0} of {1}".format(currentPage, pageMax))
-    pageEndMarker = "[0m" #found multiple times on a page but not in body of page
+
     while currentPage < pageMax:
-        response = SSH.WaitForData(pageEndMarker, 1)
+        response = SSH.WaitForData(PAGE_END_NO_EDIT, 1)
         SSH.SendCommand(NEXTPAGE)
         pageData = SSH.WaitForPattern(STATIONPAGEPATTERN, 1)
         currentPage += 1
         # Log("page:{0} of {1}".format(currentPage, pageMax)) 
     SSH.SendCommand(CANCEL)
     SSH.WaitForData("Command:")
-
-# _StationPagePattern = "\e\[0;7mPage\s+(?<CurrentPage>\d+)\s?of\s+(?<MaxPage>\d+)\e\[0m"
-# def GetPageMax(page):
-#     pageInfo = re.search(STATIONPAGEPATTERN, page)
-#     if pageInfo != None:
-        
-#         return int(pageInfo.group(2))
-
-# class PageOptions(Enum):
-#     PAGEMAX = 1
-#     PAGECURRENT = 2
-#     ALL = 3
+    

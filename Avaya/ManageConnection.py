@@ -2,6 +2,12 @@ from Logger import Log
 import SSH
 import MyRequest
 
+def Login():
+    connected = SSH.IsConnected
+    Log("SSH connected: {0}".format(connected))
+    if not connected:
+        LoginSsh()
+
 def RecievedCorrectDataSsh(expect, waitTime = 2):
         data = SSH.WaitForData(expect, waitTime)
         if data == None:

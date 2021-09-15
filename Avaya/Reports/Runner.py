@@ -1,15 +1,11 @@
 from Logger import Log
 import SSH
-from Avaya.ManageConnection import LoginSsh, CloseSsh
+from Avaya.ManageConnection import Login, CloseSsh
 import ListStation
 import DisplayStation
 
 def DoSetDump():
-    Log("-> DoSetDump")
-    connected = SSH.IsConnected
-    Log("SSH connected: {0}".format(connected))
-    if not connected:
-        LoginSsh()
+    Login()
 
     listStatNumbers = ListStation.GetNumbersInSwitch()
     SSH.WaitForData("Command:")
