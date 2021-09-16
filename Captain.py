@@ -31,7 +31,7 @@ print('C# console message -> Not python')
 log = Logger(MyRequest)
 
 eventLogPath = log.GetBaseEventLogLocation()
-
+Log("testestetstesetsetes")
 #debugConsole = sys.stdout # Save a reference to the original standard output
 ScriptSuccess = False
 ScriptErrorOrMessageText = ""
@@ -48,8 +48,7 @@ with open(eventLogPath, 'a') as f:
     
     # Globals.Inititalize()
     ExternalGlobals.Inititalize()
-    
-    #Log("***Switch dump Location: {0}".format(MyCairsGlobals.GetVariable(Globals.GENERAL, Globals.SWITCHDUMPLOCATION)), False)
+    # Log("***Switch dump Location: {0}".format(MyCairsGlobals.GetVariable(Globals.GENERAL, Globals.SWITCHDUMPLOCATION)), False)
     
     # sys.stdout = original_stdout # Reset the standard output to its original value
 

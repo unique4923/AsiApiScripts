@@ -26,5 +26,6 @@ def Log(message, includeTimeStamp = True):
 		totalMessage = "{0}: {1}".format(datetime.now().strftime("%H:%M:%S"), message)
 	else:
 		totalMessage = message
+	# ServerLog(totalMessage)
 	print(totalMessage)
 		
