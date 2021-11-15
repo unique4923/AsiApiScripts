@@ -11,7 +11,7 @@ def GetScriptInfo():
 
 def GetHistory():
     return (
-        "1.5 - 11/15/21 - 'Set_Sync' to as Avaya action handle to run set sync "
+        "1.5 - 11/15/21 - 'Set_Sync' to as Avaya action handle to run set sync\n"
         "1.4 - 9/15/21 - Code restructure for constants.  Added Consts folder.\n"
             "\tAdded ReturnDictionary (instantiated in MyRequest as C# Dictionary<string,string>) to be used throughout.  It's added to the ScriptReturnData in the end.\n"
         "1.3 - 5/15/21 - fixed bug in getting version from Capitain.py\n"
