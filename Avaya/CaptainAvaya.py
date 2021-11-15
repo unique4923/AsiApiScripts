@@ -1,11 +1,10 @@
 from Logger import Log
 import MyRequest
 
-
+#!!! ACTION IS ALL CAPS!!!
 def Run(action):
     Log("Running Avaya Script!")
-    
-    if action == "SETSYNC":
+    if action == "SETSYNC" or action == "SET_DUMP":
         import Avaya.Reports.Runner
         return Avaya.Reports.Runner.DoSetDump()
         # return SetSync.DoSetDump()
