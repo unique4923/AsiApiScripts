@@ -3,14 +3,15 @@ def GetScriptInfo():
     #Return Script Version Number (double) -> used to denote base master branch version these came from
     #Return Branch (string) -> "master branch" or specific customer
     #Return lastUpdateDate (string) -> Last day these scripts were updated
-    version = 1.5
+    version = 1.6
     branch = "Master"
-    lastUpdateDate = "11/15/2021"
+    lastUpdateDate = "1/11/2022"
     history = GetHistory()
     return version, branch, lastUpdateDate, history 
 
 def GetHistory():
     return (
+        "1.5 - 1/11/22 - logging before Matt's departure."
         "1.5 - 11/15/21 - 'Set_Sync' to as Avaya action handle to run set sync\n"
         "1.4 - 9/15/21 - Code restructure for constants.  Added Consts folder.\n"
             "\tAdded ReturnDictionary (instantiated in MyRequest as C# Dictionary<string,string>) to be used throughout.  It's added to the ScriptReturnData in the end.\n"

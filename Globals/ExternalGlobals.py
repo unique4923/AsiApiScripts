@@ -4,9 +4,10 @@ import MyRequest
 def Inititalize():
     global MyExternalGlobals
     if MyRequest.ExternalGlobals is not None: 
+        Log("Parsing external variables")
         MyExternalGlobals = ExternalGlobals()
-    # else:
-        # Log("No external variables found")
+    else:
+        Log("No external variables found")
 
 class ExternalGlobals:
     def __init__(self):
